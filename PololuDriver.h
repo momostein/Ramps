@@ -12,10 +12,15 @@ Gemaakt door Brecht Ooms
 	#include "WProgram.h"
 #endif
 
-class poluluStepper
+class pololuStepper
 {
 	public:
-		poluluStepper(int _stepPin, int _dirPin, int _enablePin);
+		pololuStepper(int _stepPin, int _dirPin, int _enablePin, int _period);
+		
+		void Step(int direction);
+		
+		int position = 0;
+		int period;
 
 	private:
 		int stepPin;

@@ -12,6 +12,8 @@
 #include "WProgram.h"
 #endif
 
+#include "PololuDriver.h"
+
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
@@ -60,6 +62,15 @@ class Ramps
     void led(bool On); //LED aan (true) of LED uit (false)
     void heater(int heaterNum, byte value); //heater (0 of 1) aansturen met PWM (byte)
 	void fan(bool On); //Fan aan (true) of fan uit (false)
+
+	pololuStepper motorX = pololuStepper(X_STEP_PIN, X_DIR_PIN, X_ENABLE_PIN);
+	pololuStepper motorY = pololuStepper(Y_STEP_PIN, Y_DIR_PIN, Y_ENABLE_PIN);
+	pololuStepper motorZ = pololuStepper(Z_STEP_PIN, Z_DIR_PIN, Z_ENABLE_PIN);
+	pololuStepper motorE = pololuStepper(E_STEP_PIN, E_DIR_PIN, E_ENABLE_PIN);
+	pololuStepper motorQ = pololuStepper(Q_STEP_PIN, Q_DIR_PIN, Q_ENABLE_PIN);
+
+
+
 
   private: //Private functies en variabelen
 

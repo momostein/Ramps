@@ -5,7 +5,7 @@
 #include "PololuDriver.h"
 #include "Arduino.h"
 
-poluluStepper::poluluStepper(int _stepPin, int _dirPin, int _enablePin)
+pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin, int _period)
 {
 	stepPin = _stepPin;
 	dirPin = _dirPin;
@@ -14,4 +14,9 @@ poluluStepper::poluluStepper(int _stepPin, int _dirPin, int _enablePin)
 	pinMode(stepPin, OUTPUT);
 	pinMode(dirPin, OUTPUT);
 	pinMode(enablePin, OUTPUT);
+}
+
+void pololuStepper::Step(int direction)
+{
+
 }
