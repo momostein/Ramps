@@ -1,3 +1,9 @@
+
+/*
+Ramps.ccp - Library voor de Ramps shield
+Gemaakt door Brecht Ooms
+*/
+
 #include "Ramps.h"
 
 Ramps::Ramps()
@@ -76,3 +82,5 @@ void Ramps::fan(bool On)
 		digitalWrite(FAN_PIN, LOW);
 	}
 }
+
+

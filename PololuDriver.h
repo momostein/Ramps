@@ -1,3 +1,4 @@
+
 /*
 PololuDriver.h - Library voor de DRV8825 Stepper Driver
 Gemaakt door Brecht Ooms
@@ -15,12 +16,13 @@ Gemaakt door Brecht Ooms
 class pololuStepper
 {
 	public:
-		pololuStepper(int _stepPin, int _dirPin, int _enablePin, int _period);
+		pololuStepper(int _stepPin, int _dirPin, int _enablePin);
 		
-		void Step(int direction);
+		void step(long amount); //Beweeg een aantal stappen in de gekozen richting (positief of negatief)
+		void moveTo(long targetPos); //Beweeg naar doelpositie
 		
-		int position = 0;
-		int period;
+		long position = 0; //Positie
+		unsigned int period = 1000; //Periode per stem in microseconden
 
 	private:
 		int stepPin;
