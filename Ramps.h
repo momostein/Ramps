@@ -60,9 +60,11 @@ class Ramps
   public: //Public functies en variabelen
     Ramps();
 
-    void led(bool On); //LED aan (true) of LED uit (false)
+	void home(); //move X, Y and Z motors to home position
+	void led(bool On); //LED aan (true) of LED uit (false)
     void heater(int heaterNum, byte value); //heater (0 of 1) aansturen met PWM (byte)
 	void fan(bool On); //Fan aan (true) of fan uit (false)
+
 
 	//declareren van motors
 	pololuStepper motorX = pololuStepper(X_STEP_PIN, X_DIR_PIN, X_ENABLE_PIN);

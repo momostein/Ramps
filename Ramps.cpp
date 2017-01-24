@@ -16,14 +16,20 @@ Ramps::Ramps()
   pinMode(X_STEP_PIN, OUTPUT);
   pinMode(X_DIR_PIN, OUTPUT);
   pinMode(X_ENABLE_PIN, OUTPUT);
+  pinMode(X_MIN_PIN, INPUT_PULLUP);
+  pinMode(X_MAX_PIN, INPUT_PULLUP);
 
   pinMode(Y_STEP_PIN, OUTPUT);
   pinMode(Y_DIR_PIN, OUTPUT);
   pinMode(Y_ENABLE_PIN, OUTPUT);
+  pinMode(Y_MIN_PIN, INPUT_PULLUP);
+  pinMode(Y_MAX_PIN, INPUT_PULLUP);
 
   pinMode(Z_STEP_PIN, OUTPUT);
   pinMode(Z_DIR_PIN, OUTPUT);
   pinMode(Z_ENABLE_PIN, OUTPUT);
+  pinMode(Z_MIN_PIN, INPUT_PULLUP);
+  pinMode(Z_MAX_PIN, INPUT_PULLUP);
 
   pinMode(E_STEP_PIN, OUTPUT);
   pinMode(E_DIR_PIN, OUTPUT);
@@ -40,6 +46,39 @@ Ramps::Ramps()
   digitalWrite(Q_ENABLE_PIN, LOW);
 
 }
+
+void Ramps::home()
+{
+	bool allhome;
+
+	do
+	{
+		allhome = true;
+		if (digitalRead(X_MIN_PIN))
+		{
+			motorX.step(-1);
+			allhome = false;
+		}
+		if (digitalRead(Y_MIN_PIN))
+		{
+			motorY.step(-1);
+			allhome = false;
+		}
+		if (digitalRead(Z_MIN_PIN))
+		{
+			motorZ.step(-1);
+			allhome = false;
+		}
+
+	} while (allhome == false);
+	
+	motorX.position = 0;
+	motorY.position = 0;
+	motorZ.position = 0;
+
+}
+
+
 
 
 //LED aan (true) of LED uit (false)
@@ -82,5 +121,3 @@ void Ramps::fan(bool On)
 		digitalWrite(FAN_PIN, LOW);
 	}
 }
-
-
