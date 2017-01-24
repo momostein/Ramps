@@ -12,6 +12,17 @@ Gemaakt door Brecht Ooms
 	#include "WProgram.h"
 #endif
 
+class poluluStepper
+{
+	public:
+		poluluStepper(int _stepPin, int _dirPin, int _enablePin);
+
+	private:
+		int stepPin;
+		int dirPin;
+		int enablePin;
+};
+
 
 #endif
 
