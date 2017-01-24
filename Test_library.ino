@@ -41,31 +41,36 @@ void loop ()
 
   if (millis() % 10000 < 5000)
   {
-    digitalWrite(X_DIR_PIN    , HIGH);
-    digitalWrite(Y_DIR_PIN    , HIGH);
-    digitalWrite(Z_DIR_PIN    , HIGH);
-    digitalWrite(E_DIR_PIN    , HIGH);
-    digitalWrite(Q_DIR_PIN    , HIGH);
+	  ramps.motorX.step(1);
+	  ramps.motorY.step(1);
+	  ramps.motorZ.step(1);
+	  ramps.motorE.step(1);
+	  ramps.motorQ.step(1);
   }
   else
   {
-    digitalWrite(X_DIR_PIN    , LOW);
-    digitalWrite(Y_DIR_PIN    , LOW);
-    digitalWrite(Z_DIR_PIN    , LOW);
-    digitalWrite(E_DIR_PIN    , LOW);
-    digitalWrite(Q_DIR_PIN    , LOW);
+	  ramps.motorX.step(-1);
+	  ramps.motorY.step(-1);
+	  ramps.motorZ.step(-1);
+	  ramps.motorE.step(-1);
+	  ramps.motorQ.step(-1);
   }
 
-  digitalWrite(X_STEP_PIN    , HIGH);
-  digitalWrite(Y_STEP_PIN    , HIGH);
-  digitalWrite(Z_STEP_PIN    , HIGH);
-  digitalWrite(E_STEP_PIN    , HIGH);
-  digitalWrite(Q_STEP_PIN    , HIGH);
-  delayMicroseconds(500);
+  if (millis() % 20000 < 10000)
+  {
+	  ramps.motorX.period = 1000;
+	  ramps.motorY.period = 1000;
+	  ramps.motorZ.period = 1000;
+	  ramps.motorE.period = 1000;
+	  ramps.motorQ.period = 1000;
 
-  digitalWrite(X_STEP_PIN    , LOW);
-  digitalWrite(Y_STEP_PIN    , LOW);
-  digitalWrite(Z_STEP_PIN    , LOW);
-  digitalWrite(E_STEP_PIN    , LOW);
-  digitalWrite(Q_STEP_PIN    , LOW);
+  }
+  else
+  {
+	  ramps.motorX.period = 500;
+	  ramps.motorY.period = 500;
+	  ramps.motorZ.period = 500;
+	  ramps.motorE.period = 500;
+	  ramps.motorQ.period = 500;
+  }
 }
