@@ -82,7 +82,7 @@
   <ItemGroup>
     <ClInclude Include="PololuDriver.h" />
     <ClInclude Include="Ramps.h">
-      <FileType>CppCode</FileType>
+      <FileType>CppHeader</FileType>
     </ClInclude>
     <ClInclude Include="__vm\.Test_library.vsarduino.h" />
   </ItemGroup>

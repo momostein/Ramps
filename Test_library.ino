@@ -61,7 +61,7 @@ void loop ()
   digitalWrite(Z_STEP_PIN    , HIGH);
   digitalWrite(E_STEP_PIN    , HIGH);
   digitalWrite(Q_STEP_PIN    , HIGH);
-  delay(1);
+  delayMicroseconds(500);
 
   digitalWrite(X_STEP_PIN    , LOW);
   digitalWrite(Y_STEP_PIN    , LOW);
