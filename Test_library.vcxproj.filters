@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Test_library.ino" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Test_library.vsarduino.h">

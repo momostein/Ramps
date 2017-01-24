@@ -75,6 +75,9 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md">
+      <FileType>Asax</FileType>
+    </None>
     <None Include="Test_library.ino">
       <FileType>CppCode</FileType>
     </None>
