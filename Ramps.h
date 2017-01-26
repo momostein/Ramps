@@ -57,13 +57,13 @@
 
 class Ramps
 {
-  public: //Public functies en variabelen
-    Ramps();
+	public: //Public functies en variabelen
+		Ramps(); //Constructor
 
-	void home(); //move X, Y and Z motors to home position
-	void led(bool On); //LED aan (true) of LED uit (false)
-    void heater(int heaterNum, byte value); //heater (0 of 1) aansturen met PWM (byte)
-	void fan(bool On); //Fan aan (true) of fan uit (false)
+		void home(); //Beweeg Motors naar hun Home positie
+		void led(bool On); //LED aan (true) of LED uit (false)
+		void heater(int heaterNum, byte value); //heater (0 of 1) aansturen met PWM (byte)
+		void fan(bool On); //Fan aan (true) of fan uit (false)
 
 
 	//declareren van motors

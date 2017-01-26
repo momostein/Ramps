@@ -6,6 +6,7 @@ Gemaakt door Brecht Ooms
 
 #include "Ramps.h"
 
+//Constructor
 Ramps::Ramps()
 {
   pinMode(FAN_PIN, OUTPUT);
@@ -47,31 +48,55 @@ Ramps::Ramps()
 
 }
 
+//Beweeg Motors X, Y en Z naar hun Home positie
 void Ramps::home()
 {
 	bool allhome;
 
+	//stepOff van motoren
+	motorX.stepOff();
+	motorY.stepOff();
+	motorZ.stepOff();
+
+	//Zet richtingen van motors
+	motorX.setDir(-1);
+	motorY.setDir(-1);
+	motorZ.setDir(-1);
+
 	do
 	{
 		allhome = true;
+
+		//Test of de motor(s) al home zijn
 		if (digitalRead(X_MIN_PIN))
 		{
-			motorX.step(-1);
+			motorX.stepOn();
 			allhome = false;
 		}
 		if (digitalRead(Y_MIN_PIN))
 		{
-			motorY.step(-1);
+			motorY.stepOn();
 			allhome = false;
 		}
 		if (digitalRead(Z_MIN_PIN))
 		{
-			motorZ.step(-1);
+			motorZ.stepOn();
 			allhome = false;
 		}
 
+		delay(1);
+		
+		motorX.stepOff();
+		motorY.stepOff();
+		motorZ.stepOff();
+
 	} while (allhome == false);
 	
+	//Zet de richting al positief (om foute steprichting te voorkomen)
+	motorX.setDir(1);
+	motorY.setDir(1);
+	motorZ.setDir(1);
+
 	motorX.position = 0;
 	motorY.position = 0;
 	motorZ.position = 0;
