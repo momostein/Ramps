@@ -7,7 +7,7 @@ Gemaakt door Brecht Ooms
 #include "PololuDriver.h"
 #include "Arduino.h"
 
-//(STEP aansluiting, DIR aansluiting, ENABLE aansluiting)
+//Constructor
 pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin)
 {
 	stepPin = _stepPin;
@@ -21,6 +21,7 @@ pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin)
 	digitalWrite(enablePin, LOW);
 }
 
+//Stel richting handmatig in
 void pololuStepper::setDir(short _dir)
 {
   if (_dir > 0)
@@ -35,40 +36,55 @@ void pololuStepper::setDir(short _dir)
   }
 }
 
-
-//Beweeg een aantal stappen in de gekozen richting (positief of negatief)
-void pololuStepper::autoStep(long amount)
+//Step Handmatig (Step off moet volgen na een bepaalde vertraging)
+bool pololuStepper::stepOn()
 {
-	while (amount != 0)
-	if (amount > 0)
+	if (!stepped)
 	{
-		digitalWrite(dirPin, LOW);
-
+		position += dir;
 		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(period / 2);
-
-		digitalWrite(stepPin, LOW);
-		delayMicroseconds(period / 2);
-
-		position++;
-		amount--;
+		stepped = true;
+		
+		return true;
 	}
-	else if (amount < 0)
+	else
 	{
-		digitalWrite(dirPin, HIGH);
-
-		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(period / 2);
-
-		digitalWrite(stepPin, LOW);
-		delayMicroseconds(period / 2);
-
-		position--;
-		amount++;
+		return false;
 	}
 }
 
-void pololuStepper::moveTo(long targetPos)
+//Concludeer Stap handmatig (Moet na StepOn komen)
+void pololuStepper::stepOff()
 {
-	step(targetPos - position);
+	digitalWrite(stepPin, LOW);
+	stepped = false;
+}
+
+
+
+//Beweeg een aantal stappen in de gekozen richting (positief of negatief) en met de gegeven delay (in microseconden)
+void pololuStepper::autoStep(long amount, int _delay)
+{
+	setDir(constrain(amount, -1, 1));
+	
+	if (stepped) //Het kan gebeuren dat iemand stepOff is vergeten en dan klopt de positie niet meer.
+	{
+		stepOff();
+	}
+
+	while (!(amount == 0))
+	{
+		stepOn();
+		delayMicroseconds(_delay);
+		stepOff();
+
+		position += dir;
+		amount -= dir;
+	}
+}
+
+//Beweeg naar doelpositie met gegegeven delay (in microseconden)
+void pololuStepper::moveTo(long targetPos, int _delay)
+{
+	autoStep(targetPos - position, _delay);
 }

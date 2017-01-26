@@ -16,20 +16,22 @@ Gemaakt door Brecht Ooms
 class pololuStepper
 {
 	public:
-		pololuStepper(int _stepPin, int _dirPin, int _enablePin);
+		pololuStepper(int _stepPin, int _dirPin, int _enablePin); //Constructor
 
-    void setDir(short _dir);
-    void stepOn();
-    void stepOff();
-    
-		void autoStep(long amount); //Beweeg een aantal stappen in de gekozen richting (positief of negatief)
-		void moveTo(long targetPos); //Beweeg naar doelpositie
+		void setDir(short _dir); //Stel richting handmatig in
+		bool stepOn(); //Step Handmatig (Step off moet volgen na een bepaalde vertraging)
+		void stepOff(); //Concludeer Stap handmatig (Moet na StepOn komen)
+		
+		void autoStep(long amount, int _delay); //Beweeg een aantal stappen in de gekozen richting (positief of negatief) en met de gegeven delay (in microseconden)
+		void moveTo(long targetPos, int _delay); //Beweeg naar doelpositie met gegegeven delay (in microseconden)
 		
 		long position = 0; //Positie
-		unsigned int period = 1000; //Periode per stem in microseconden
 
 	private:
-    int dir = 1;
+    	
+		short dir = 1;
+		bool stepped = false;
+		
 		int stepPin;
 		int dirPin;
 		int enablePin;

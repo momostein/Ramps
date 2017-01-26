@@ -3,6 +3,8 @@
 
 Ramps ramps = Ramps();
 
+int microseconds = 1000;
+
 void setup()
 {
 
@@ -41,36 +43,42 @@ void loop ()
 
   if (millis() % 10000 < 5000)
   {
-	  ramps.motorX.step(1);
-	  ramps.motorY.step(1);
-	  ramps.motorZ.step(1);
-	  ramps.motorE.step(1);
-	  ramps.motorQ.step(1);
+	  ramps.motorX.setDir(1);
+	  ramps.motorY.setDir(1);
+	  ramps.motorZ.setDir(1);
+	  ramps.motorE.setDir(1);
+	  ramps.motorQ.setDir(1);
   }
   else
   {
-	  ramps.motorX.step(-1);
-	  ramps.motorY.step(-1);
-	  ramps.motorZ.step(-1);
-	  ramps.motorE.step(-1);
-	  ramps.motorQ.step(-1);
+	  ramps.motorX.setDir(-1);
+	  ramps.motorY.setDir(-1);
+	  ramps.motorZ.setDir(-1);
+	  ramps.motorE.setDir(-1);
+	  ramps.motorQ.setDir(-1);
   }
 
-  if (millis() % 3000 < 1500)
+  if (millis() % 4000 < 2000)
   {
-	  ramps.motorX.period = 500;
-	  ramps.motorY.period = 500;
-	  ramps.motorZ.period = 500;
-	  ramps.motorE.period = 500;
-	  ramps.motorQ.period = 500;
-
+	  microseconds = 500;
   }
   else
   {
-	  ramps.motorX.period = 100;
-	  ramps.motorY.period = 100;
-	  ramps.motorZ.period = 100;
-	  ramps.motorE.period = 100;
-	  ramps.motorQ.period = 100;
+	  microseconds = 250;
   }
+
+  ramps.motorX.stepOn();
+  ramps.motorY.stepOn();
+  ramps.motorZ.stepOn();
+  ramps.motorE.stepOn();
+  ramps.motorQ.stepOn();
+
+  delayMicroseconds(microseconds);
+
+  ramps.motorX.stepOff();
+  ramps.motorY.stepOff();
+  ramps.motorZ.stepOff();
+  ramps.motorE.stepOff();
+  ramps.motorQ.stepOff();
+
 }
