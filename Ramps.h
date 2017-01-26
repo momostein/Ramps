@@ -50,20 +50,21 @@
 #define PS_ON_PIN          12
 #define KILL_PIN           -1
 
-#define HEATER_0_PIN       10	 //PWM PIN!
-#define HEATER_1_PIN       8	 //PWM PIN!
-#define TEMP_0_PIN          13   // Analoge numering
-#define TEMP_1_PIN          14   // Analoge numering
+#define HEATER_0_PIN       10	//PWM PIN!
+#define HEATER_1_PIN       8	//PWM PIN!
+#define TEMP_0_PIN         13	// Analoge numering
+#define TEMP_1_PIN         14	// Analoge numering
 
 class Ramps
 {
 	public: //Public functies en variabelen
-		Ramps(); //Constructor
+		
+		Ramps();								//Constructor
 
-		void home(); //Beweeg Motors naar hun Home positie
-		void led(bool On); //LED aan (true) of LED uit (false)
+		void home();							//Beweeg Motors X, Y en Z naar hun Home positie
+		void led(bool On);						//LED aan (true) of LED uit (false)
 		void heater(int heaterNum, byte value); //heater (0 of 1) aansturen met PWM (byte)
-		void fan(bool On); //Fan aan (true) of fan uit (false)
+		void fan(bool On);						//Fan aan (true) of fan uit (false)
 
 
 	//declareren van motors
