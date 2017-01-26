@@ -56,21 +56,21 @@ void loop ()
 	  ramps.motorQ.step(-1);
   }
 
-  if (millis() % 20000 < 10000)
-  {
-	  ramps.motorX.period = 1000;
-	  ramps.motorY.period = 1000;
-	  ramps.motorZ.period = 1000;
-	  ramps.motorE.period = 1000;
-	  ramps.motorQ.period = 1000;
-
-  }
-  else
+  if (millis() % 3000 < 1500)
   {
 	  ramps.motorX.period = 500;
 	  ramps.motorY.period = 500;
 	  ramps.motorZ.period = 500;
 	  ramps.motorE.period = 500;
 	  ramps.motorQ.period = 500;
+
+  }
+  else
+  {
+	  ramps.motorX.period = 100;
+	  ramps.motorY.period = 100;
+	  ramps.motorZ.period = 100;
+	  ramps.motorE.period = 100;
+	  ramps.motorQ.period = 100;
   }
 }

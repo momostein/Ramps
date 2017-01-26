@@ -21,9 +21,23 @@ pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin)
 	digitalWrite(enablePin, LOW);
 }
 
+void pololuStepper::setDir(short _dir)
+{
+  if (_dir > 0)
+  {
+    dir = 1;
+    digitalWrite(dirPin, LOW);
+  }
+  else if (_dir < 0)
+  {
+    dir = -1;
+    digitalWrite(dirPin, HIGH);
+  }
+}
+
 
 //Beweeg een aantal stappen in de gekozen richting (positief of negatief)
-void pololuStepper::step(long amount)
+void pololuStepper::autoStep(long amount)
 {
 	while (amount != 0)
 	if (amount > 0)
