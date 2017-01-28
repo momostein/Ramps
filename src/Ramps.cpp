@@ -85,13 +85,13 @@ void Ramps::home()
 		}
 
 		delay(1);
-		
+
 		motorX.stepOff();
 		motorY.stepOff();
 		motorZ.stepOff();
 
 	} while (allhome == false);
-	
+
 	//Zet de richting al positief (om foute steprichting te voorkomen)
 	motorX.setDir(1);
 	motorY.setDir(1);
@@ -109,28 +109,28 @@ void Ramps::home()
 //LED aan (true) of LED uit (false)
 void Ramps::led(bool On)
 {
-  if (On)
-  {
-    digitalWrite(LED_PIN, HIGH);
-  }
-  else
-  {
-    digitalWrite(LED_PIN, LOW);
-  }
+    if (On)
+    {
+        digitalWrite(LED_PIN, HIGH);
+    }
+    else
+    {
+        digitalWrite(LED_PIN, LOW);
+    }
 }
 
 
 //heater (0 of 1) aansturen met PWM (byte)
 void Ramps::heater(int heaterNum, byte value)
 {
-  if (heaterNum == 0)
-  {
-    analogWrite(HEATER_0_PIN, value);
-  }
-  else if (heaterNum == 1)
-  {
-    analogWrite(HEATER_1_PIN, value);
-  }
+    if (heaterNum == 0)
+    {
+        analogWrite(HEATER_0_PIN, value);
+    }
+    else if (heaterNum == 1)
+    {
+        analogWrite(HEATER_1_PIN, value);
+    }
 }
 
 

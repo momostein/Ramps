@@ -21,22 +21,20 @@ class pololuStepper
 		void setDir(short _dir);					//Stel richting handmatig in
 		bool stepOn();								//Step Handmatig (Step off moet volgen na een bepaalde vertraging)
 		void stepOff();								//Concludeer Stap handmatig (Moet na StepOn komen)
-		
+
 		void autoStep(long amount, int _delay);		//Beweeg een aantal stappen in de gekozen richting (positief of negatief) en met de gegeven delay (in microseconden)
 		void moveTo(long targetPos, int _delay);	//Beweeg naar doelpositie met gegegeven delay (in microseconden)
-		
+
 		long position = 0;							//Positie
 
 	private:
-    	
+
 		short dir = 1;
 		bool stepped = false;
-		
+
 		int stepPin;
 		int dirPin;
 		int enablePin;
 };
 
-
 #endif
-

@@ -24,16 +24,16 @@ pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin)
 //Stel richting handmatig in
 void pololuStepper::setDir(short _dir)
 {
-  if (_dir > 0)
-  {
-    dir = 1;
-    digitalWrite(dirPin, LOW);
-  }
-  else if (_dir < 0)
-  {
-    dir = -1;
-    digitalWrite(dirPin, HIGH);
-  }
+  	if (_dir > 0)
+  	{
+    	dir = 1;
+    	digitalWrite(dirPin, LOW);
+  	}
+  	else if (_dir < 0)
+  	{
+    	dir = -1;
+    	digitalWrite(dirPin, HIGH);
+  	}
 }
 
 //Step Handmatig (Step off moet volgen na een bepaalde vertraging)
@@ -44,7 +44,7 @@ bool pololuStepper::stepOn()
 		position += dir;
 		digitalWrite(stepPin, HIGH);
 		stepped = true;
-		
+
 		return true;
 	}
 	else
@@ -66,7 +66,7 @@ void pololuStepper::stepOff()
 void pololuStepper::autoStep(long amount, int _delay)
 {
 	setDir(constrain(amount, -1, 1));
-	
+
 	if (stepped) //Het kan gebeuren dat iemand stepOff is vergeten en dan klopt de positie niet meer.
 	{
 		stepOff();
