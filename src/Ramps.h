@@ -1,7 +1,6 @@
-
 /*
-  Ramps.h - Library voor de Ramps shield
-  Gemaakt door Brecht Ooms
+    Ramps.h - Library voor de Ramps shield
+    Gemaakt door Brecht Ooms
 */
 
 #ifndef _Ramps_h
@@ -61,11 +60,13 @@ class Ramps
 
 		Ramps();								//Constructor
 
-		void home();							//Beweeg Motors X, Y en Z naar hun Home positie
+
+		void home(int _delay);					//Beweeg Motors X, Y en Z naar hun Home positie (met delay in microseconden)
 		void led(bool On);						//LED aan (true) of LED uit (false)
 		void heater(int heaterNum, byte value); //heater (0 of 1) aansturen met PWM (byte)
 		void fan(bool On);						//Fan aan (true) of fan uit (false)
 
+		void moveTo(long targetX, long targetY, long targetZ, int _delay); //Beweeg naar gegeven positie met bresenhams lijn algoritme (met delay in microseconden)
 
 		//declareren van motors
 		pololuStepper motorX = pololuStepper(X_STEP_PIN, X_DIR_PIN, X_ENABLE_PIN);

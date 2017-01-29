@@ -1,7 +1,6 @@
-
 /*
-PololuDriver.h - Library voor de DRV8825 Stepper Driver
-Gemaakt door Brecht Ooms
+    PololuDriver.h - Library voor de DRV8825 Stepper Driver
+    Gemaakt door Brecht Ooms
 */
 
 #ifndef _POLOLUDRIVER_h

@@ -1,7 +1,6 @@
-
 /*
-PololuDriver.ccp - Library voor de DRV8825 Stepper Driver
-Gemaakt door Brecht Ooms
+    PololuDriver.ccp - Library voor de DRV8825 Stepper Driver
+    Gemaakt door Brecht Ooms
 */
 
 #include "PololuDriver.h"
@@ -56,11 +55,12 @@ bool pololuStepper::stepOn()
 //Concludeer Stap handmatig (Moet na StepOn komen)
 void pololuStepper::stepOff()
 {
-	digitalWrite(stepPin, LOW);
-	stepped = false;
+	if (stepped)
+	{
+		digitalWrite(stepPin, LOW);
+		stepped = false;
+	}
 }
-
-
 
 //Beweeg een aantal stappen in de gekozen richting (positief of negatief) en met de gegeven delay (in microseconden)
 void pololuStepper::autoStep(long amount, int _delay)
