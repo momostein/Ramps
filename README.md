@@ -1,4 +1,8 @@
-# THIS IS NOT DONE YET
-**THIS IS A WORK IN PROGRESS, it's not a functional library yet.**
+# Delta Robot
 
-this is just a program with two header files
+**Welcome GitHub repository of my school project!**
+
+Here I will be uploading my Arduino program and included libraries i made for it.
+
+
+
