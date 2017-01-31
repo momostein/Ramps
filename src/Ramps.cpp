@@ -83,7 +83,7 @@ void Ramps::home(int _delay = 1000)
 			allhome = false;
 		}
 
-		delay(microsec);
+		delay(_delay);
 
 		motorX.stepOff();
 		motorY.stepOff();
@@ -193,7 +193,8 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     }
 
     //als deltaX de grootste is gebruiken vergelijken we steeds met de X as
-    if(deltaX > deltaY & deltaX > deltaZ)
+    if(deltaX > deltaY && deltaX > deltaZ)
+    {
         while(motorX.position /= targetX)
         {
             //MotorX zal altijd stappen
@@ -226,7 +227,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     }
 
     //als deltaY de grootste is gebruiken vergelijken we steeds met de X as
-    if(deltaZ > deltaX & deltaZ > deltaY)
+    if(deltaZ > deltaX && deltaZ > deltaY)
     {
         while(motorZ.position /= targetZ)
         {
@@ -260,7 +261,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     }
 
     //als deltaY de grootste is gebruiken vergelijken we steeds met de X as
-    if(deltaY > deltaX & deltaY > deltaZ)
+    if(deltaY > deltaX && deltaY > deltaZ)
     {
         while(motorY.position /= targetY)
         {
