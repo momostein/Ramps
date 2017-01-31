@@ -7,15 +7,17 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println(ramps.motorX.position);
-
+    ramps.home();
 }
 
 void loop()
 {
-    ramps.moveTo(-10000,0,0,50);
+    ramps.motorX.autoStep(50000,50);
     Serial.println(ramps.motorX.position);
     delay(500);
-    ramps.moveTo(0,0,0,50);
-    delay(500);
+
+    ramps.motorX.autoStep(-50000,50);
     Serial.println(ramps.motorX.position);
+    delay(500);
+
 }

@@ -77,8 +77,7 @@ void pololuStepper::autoStep(long amount, int _delay)
 		stepOn();
 		delayMicroseconds(_delay);
 		stepOff();
-
-		position += dir;
+		
 		amount -= dir;
 	}
 }
