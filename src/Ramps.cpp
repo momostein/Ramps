@@ -161,7 +161,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     if (deltaX < 0)
     {
         motorX.setDir(-1);
-        deltaX = -1;
+        deltaX *= -1;
     }
     else
     {
@@ -171,7 +171,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     if (deltaY < 0)
     {
         motorY.setDir(-1);
-        deltaY = -1;
+        deltaY *= -1;
     }
     else
     {
@@ -181,7 +181,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     if (deltaZ < 0)
     {
         motorZ.setDir(-1);
-        deltaZ = -1;
+        deltaZ *= -1;
     }
     else
     {
@@ -189,9 +189,9 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     }
 
     //als deltaX de grootste is gebruiken vergelijken we steeds met de X as
-    if(deltaX > deltaY && deltaX > deltaZ)
+    if(deltaX >= deltaY && deltaX >= deltaZ)
     {
-        while(motorX.position /= targetX)
+        while(motorX.position != targetX)
         {
             //MotorX zal altijd stappen
             motorX.stepOn();
@@ -222,10 +222,10 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
         }
     }
 
-    //als deltaY de grootste is gebruiken vergelijken we steeds met de X as
-    if(deltaZ > deltaX && deltaZ > deltaY)
+    //als deltaZ de grootste is gebruiken vergelijken we steeds met de Z as
+    if(deltaZ >= deltaX && deltaZ >= deltaY)
     {
-        while(motorZ.position /= targetZ)
+        while(motorZ.position != targetZ)
         {
             //MotorZ zal altijd stappen
             motorZ.stepOn();
@@ -256,10 +256,10 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
         }
     }
 
-    //als deltaY de grootste is gebruiken vergelijken we steeds met de X as
-    if(deltaY > deltaX && deltaY > deltaZ)
+    //als deltaY de grootste is gebruiken vergelijken we steeds met de Y as
+    if(deltaY >= deltaX && deltaY >= deltaZ)
     {
-        while(motorY.position /= targetY)
+        while(motorY.position != targetY)
         {
             //MotorX zal altijd stappen
             motorY.stepOn();
