@@ -101,7 +101,7 @@ void Ramps::home()
 	motorX.setDir(-1);
 	motorY.setDir(-1);
 	motorZ.setDir(-1);
-    Serial.print("Homing... ");
+
 	do
 	{
 		allhome = true;
@@ -130,7 +130,7 @@ void Ramps::home()
 		motorZ.stepOff();
 
 	} while (allhome == false);
-    Serial.println("DONE!");
+    
 	//Zet de richting al positief (om foute steprichting te voorkomen)
 	motorX.setDir(1);
 	motorY.setDir(1);
