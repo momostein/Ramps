@@ -130,7 +130,7 @@ void Ramps::home()
 		motorZ.stepOff();
 
 	} while (allhome == false);
-    
+
 	//Zet de richting al positief (om foute steprichting te voorkomen)
 	motorX.setDir(1);
 	motorY.setDir(1);
@@ -221,9 +221,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
             motorZ.stepOff();
         }
     }
-
-    //als deltaZ de grootste is gebruiken vergelijken we steeds met de Z as
-    if(deltaZ >= deltaX && deltaZ >= deltaY)
+    else if(deltaZ >= deltaX && deltaZ >= deltaY) //als deltaZ de grootste is gebruiken vergelijken we steeds met de Z as
     {
         while(motorZ.position != targetZ)
         {
@@ -255,9 +253,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
             motorZ.stepOff();
         }
     }
-
-    //als deltaY de grootste is gebruiken vergelijken we steeds met de Y as
-    if(deltaY >= deltaX && deltaY >= deltaZ)
+    else if(deltaY >= deltaX && deltaY >= deltaZ) //als deltaY de grootste is gebruiken vergelijken we steeds met de Y as
     {
         while(motorY.position != targetY)
         {
