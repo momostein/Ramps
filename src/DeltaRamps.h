@@ -18,9 +18,12 @@
 class DeltaRamps: public Ramps
 {
 	public:
-		DeltaRamps();
+		DeltaRamps(int _stepsmm);
 
 		void moveto(long targetX, long targetY, long targetZ, int _delay);
+
+	private:
+		stepsmm
 };
 
 #endif
