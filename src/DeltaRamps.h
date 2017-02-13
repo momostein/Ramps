@@ -15,15 +15,39 @@
 #include "WProgram.h"
 #endif
 
+struct point_t
+{
+	double x;
+	double y;
+	double z;
+	point_t(double _x, double _y, double _z)
+	{
+		x = _x;
+		y = _y;
+		z = _z;
+	};
+};
+
+
 class DeltaRamps: public Ramps
 {
 	public:
 		DeltaRamps(int _stepsmm);
 
-		void moveto(long targetX, long targetY, long targetZ, int _delay);
+		void home();
 
+		void moveToDelta(point_t target, double stepSize);
+
+		point_t convertToAxes(point_t point);
+		point_t convertToCart(point_t point);
+
+		point_t getPosition();
+
+		point_t position = point_t(0,0,0);
 	private:
-		stepsmm
+
+		int stepsmm;
 };
+
 
 #endif
