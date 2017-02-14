@@ -16,8 +16,8 @@ void setup()
 
 void loop()
 {
-	Serial.print(deltaRamps.convertToCart(point_t(4,5,6)).x);
-	Serial.print(deltaRamps.convertToCart(point_t(4,5,6)).y);
-	Serial.print(deltaRamps.convertToCart(point_t(4,5,6)).z);
-
+	Serial.println(deltaRamps.convertToCart(point_t(4,5,6)).x);
+	Serial.println(deltaRamps.convertToCart(point_t(4,5,6)).y);
+	Serial.println(deltaRamps.convertToCart(point_t(4,5,6)).z);
+	delay(1000);
 }

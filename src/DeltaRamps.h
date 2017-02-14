@@ -36,7 +36,7 @@ class DeltaRamps: public Ramps
 
 		void home();
 
-		void moveToDelta(point_t target, double stepSize);
+		void moveToDelta(point_t target, double stepSize, int delay);
 
 		point_t convertToAxes(point_t point);
 		point_t convertToCart(point_t point);

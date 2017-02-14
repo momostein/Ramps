@@ -20,11 +20,11 @@ void DeltaRamps::home()
 	position = convertToCart(point_t(motorX.position, motorY.position, motorZ.position));
 }
 
-void DeltaRamps::moveToDelta(point_t target, double stepSize)
+void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)
 {
 	//hier worden de berekeningen gedaan en zo bewogen in een rechte lijn
-
-
+	point_t targetAxes = convertToAxes(target);
+	Ramps::moveTo(targetAxes.x, targetAxes.y, targetAxes.z, delay);
 }
 
 point_t DeltaRamps::convertToAxes(point_t point)
