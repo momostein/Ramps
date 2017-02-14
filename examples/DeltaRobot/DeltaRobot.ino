@@ -6,7 +6,7 @@
 #include "DeltaRamps.h"
 #include "Measurements.h"
 
-DeltaRamps deltaRamps(STEPS_MM);
+DeltaRamps deltaRamps(STEPS_MM, TOWER_RADIUS, TOWER_HEIGHT, ARM_LENGHT, PIVOT_OFFSET, TOOL_OFFSET);
 
 void setup()
 {
