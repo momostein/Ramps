@@ -17,7 +17,7 @@ DeltaRamps::DeltaRamps(int _stepsmm, double _towerRadius, double _towerHeight, d
 	armLenght = _armLenght;
 
 	pivotOffset = _pivotOffset;
-	tooloffset = _tooloffset;
+	toolOffset = _toolOffset;
 
 	strutX.x = _towerRadius; // towerRadius * cos(0°)
 	strutY.x = _towerRadius * cos(M_2_PI / 3); // 2/3 * Pi (120°)
@@ -30,13 +30,12 @@ DeltaRamps::DeltaRamps(int _stepsmm, double _towerRadius, double _towerHeight, d
 	strutX.z = _towerHeight;
 	strutY.z = _towerHeight;
 	strutZ.z = _towerHeight;
+
 }
 
 void DeltaRamps::home()
 {
 	Ramps::home();
-
-	position = convertToCart(point_t(motorX.position, motorY.position, motorZ.position));
 }
 
 void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)

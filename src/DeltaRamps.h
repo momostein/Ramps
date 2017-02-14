@@ -32,7 +32,7 @@ struct point_t
 class DeltaRamps: public Ramps
 {
 	public:
-		DeltaRamps(int _stepsmm, double _towerRadius, _towerHeight, double _armLenght, double _pivotOffset, double _toolOffset);
+		DeltaRamps(int _stepsmm, double _towerRadius, double _towerHeight, double _armLenght, double _pivotOffset, double _toolOffset);
 
 		void home();
 
@@ -47,9 +47,9 @@ class DeltaRamps: public Ramps
 		int stepsmm;
 
 		//positions of the three struts (axes) with the z coördinate being the height of the 0 point.
-		point_t strutX;
-		point_t strutY;
-		point_t strutZ;
+		point_t strutX = point_t(0,0,0);
+		point_t strutY = point_t(0,0,0);
+		point_t strutZ = point_t(0,0,0);
 
 		double armLenght; //length of the arms
 
