@@ -32,9 +32,7 @@ struct point_t
 class DeltaRamps: public Ramps
 {
 	public:
-		DeltaRamps(int _stepsmm, double _towerRadius, double _towerHeight, double _armLenght, double _pivotOffset, double _toolOffset);
-
-		void home();
+		DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset);
 
 		void moveToDelta(point_t target, double stepSize, int delay);
 
@@ -46,15 +44,22 @@ class DeltaRamps: public Ramps
 	private:
 		int stepsmm;
 
-		//positions of the three struts (axes) with the z coördinate being the height of the 0 point.
-		point_t strutX = point_t(0,0,0);
-		point_t strutY = point_t(0,0,0);
-		point_t strutZ = point_t(0,0,0);
+		double H; //frame height
+		double l; //arm lenght
 
-		double armLenght; //length of the arms
+		double Sb; //P joints (Bi) equilateral triangle side
+		double Wb; //planar distance from {0} to P joints triangle side
+		double Ub; //planar distance from {0} to a vertex of the P joints triangle
 
-		double pivotOffset; //distance from the pivot points of the arms to the center of the effector
-		double toolOffset; //height of the effector
+		double Sp; //platform equilateral triangle side
+		double Wp; //planar distance from {P} to near platform side
+		double Up; //planar distance from {P} to a platform vertex
+
+		double Oz; //nozzle z offset
+
+		double a;
+		double b;
+		double c;
 };
 
 

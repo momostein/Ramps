@@ -6,7 +6,7 @@
 #include "DeltaRamps.h"
 #include "Measurements.h"
 
-DeltaRamps deltaRamps(STEPS_MM, TOWER_RADIUS, TOWER_HEIGHT, ARM_LENGHT, PIVOT_OFFSET, TOOL_OFFSET);
+DeltaRamps deltaRamps = DeltaRamps(STEPS_MM, TOWER_RADIUS, TOWER_HEIGHT, ARM_LENGHT, PIVOT_OFFSET, TOOL_OFFSET);
 
 void setup()
 {
@@ -16,8 +16,10 @@ void setup()
 
 void loop()
 {
-	Serial.println(deltaRamps.convertToCart(point_t(4,5,6)).x);
-	Serial.println(deltaRamps.convertToCart(point_t(4,5,6)).y);
-	Serial.println(deltaRamps.convertToCart(point_t(4,5,6)).z);
+	Serial.print(deltaRamps.convertToAxes(point_t(0,0,20)).x);
+	Serial.print(" ");
+	Serial.print(deltaRamps.convertToCart(point_t(0,0,20)).y);
+	Serial.print(" ");
+	Serial.println(deltaRamps.convertToCart(point_t(0,0,20)).z);
 	delay(1000);
 }

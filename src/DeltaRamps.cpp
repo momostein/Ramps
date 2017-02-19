@@ -10,32 +10,26 @@
 
 
 
-DeltaRamps::DeltaRamps(int _stepsmm, double _towerRadius, double _towerHeight, double _armLenght, double _pivotOffset, double _toolOffset):Ramps()
+DeltaRamps::DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset):Ramps()
 {
 	stepsmm = _stepsmm;
 
-	armLenght = _armLenght;
+	H = _towerHeight;
+	l = _armLenght;
 
-	pivotOffset = _pivotOffset;
-	toolOffset = _toolOffset;
+	Sb = _baseSide;
+	Wb = sqrt(3) * Sb / 6;
+	Ub = Sb / sqrt(3);
 
-	strutX.x = _towerRadius; // towerRadius * cos(0°)
-	strutY.x = _towerRadius * cos(M_2_PI / 3); // 2/3 * Pi (120°)
-	strutZ.x = _towerRadius * cos(M_2_PI / 3); // 2/3 * Pi (120°)
+	Sp = _platformSide;
+	Wp = sqrt(3) * Sp / 6;
+	Up = Sp / sqrt(3);
 
-	strutX.y = 0; // towerRadius * cos(90°)
-	strutY.y = _towerRadius * cos(M_PI_2 / 3); // 1/6 * Pi (30°)
-	strutZ.y = _towerRadius * cos(5 * M_PI_2 / 3); // 5/6 * Pi (150°)
+	Oz = _nozzleOffset;
 
-	strutX.z = _towerHeight;
-	strutY.z = _towerHeight;
-	strutZ.z = _towerHeight;
-
-}
-
-void DeltaRamps::home()
-{
-	Ramps::home();
+	a = (Sb - Sp) / 2;
+	b = Wb - Wp;
+	c = Up - Ub;
 }
 
 void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)
@@ -47,14 +41,44 @@ void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)
 
 point_t DeltaRamps::convertToAxes(point_t point)
 {
-	//omvormen van een cartesiaans punt tot de posities van de assen
+	point_t Axes = point_t(0,0,0);
 
-	return point;
+	point.z = point.z - H; //de volgende berekingen hebben hun oorsprong aan de bovenkant van de constructie.
+
+	double Cx  =  square(point.x) + square(point.y) + square(point.z) + square(a) + square(b) + 2*a*point.x + 2*b*point.y - square(l);
+	double Cy  =  square(point.x) + square(point.y) + square(point.z) + square(a) + square(b) - 2*a*point.x + 2*b*point.y - square(l);
+	double Cz  =  square(point.x) + square(point.y) + square(point.z) + square(c) + 2*c*point.y - square(l);
+
+	Axes.x = ((-1)*point.z - sqrt(square(point.z) - Cx)) * stepsmm;
+	Axes.y = ((-1)*point.z - sqrt(square(point.z) - Cy)) * stepsmm;
+	Axes.z = ((-1)*point.z - sqrt(square(point.z) - Cz)) * stepsmm;
+
+	return Axes;
 }
 
 point_t DeltaRamps::convertToCart(point_t point)
 {
-	//omvormen van de posities van de assen tot een punt in het cartesiaans assenstelsel
+	point.x = point.x / stepsmm;
+	point.y = point.y / stepsmm;
+	point.z = point.z / stepsmm;
+
+	point_t position = point_t(0,0,0);
+
+	double d = (point.y - point.x) / (2*a);
+	double e = (square(point.y)-square(point.x)) / (4*a);
+
+	double D = (point.y - point.x - 2*a*d) / (b - c);
+	double E = (square(c) - square(a) - square(b) - 2*a*e + square(point.z) - square(point.x)) / (2*(b - c));
+
+	double A = square(d) + square(D) + l;
+	double B = 2*(d*e + D*E + c*D + point.z);
+	double C = square(e) + square(E) + square(c) + 2*c*E + square(point.z) - square(l);
+
+	position.z = ((-1)*B - sqrt(square(B) - 4*A*C)) / (2*A);
+	position.x = d*position.z + e;
+	position.y = D*position.z + E;
+
+	position.z = position.z + H; //de vorige berekingen hebben hun oorsprong aan de bovenkant van de constructie.
 
 	return point;
 }
