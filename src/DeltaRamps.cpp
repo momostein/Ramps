@@ -10,32 +10,26 @@
 
 
 
-DeltaRamps::DeltaRamps(int _stepsmm, double _towerRadius, double _towerHeight, double _armLenght, double _pivotOffset, double _toolOffset):Ramps()
+DeltaRamps::DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset):Ramps()
 {
 	stepsmm = _stepsmm;
 
-	armLenght = _armLenght;
+	H = _towerHeight;
+	l = _armLenght;
 
-	pivotOffset = _pivotOffset;
-	toolOffset = _toolOffset;
+	Sb = _baseSide;
+	Wb = sqrt(3) * Sb / 6;
+	Ub = Sb / sqrt(3);
 
-	strutX.x = _towerRadius; // towerRadius * cos(0°)
-	strutY.x = _towerRadius * cos(M_2_PI / 3); // 2/3 * Pi (120°)
-	strutZ.x = _towerRadius * cos(M_2_PI / 3); // 2/3 * Pi (120°)
+	Sp = _platformSide;
+	Wp = sqrt(3) * Sp / 6;
+	Up = Sp / sqrt(3);
 
-	strutX.y = 0; // towerRadius * cos(90°)
-	strutY.y = _towerRadius * cos(M_PI_2 / 3); // 1/6 * Pi (30°)
-	strutZ.y = _towerRadius * cos(5 * M_PI_2 / 3); // 5/6 * Pi (150°)
+	Oz = _nozzleOffset;
 
-	strutX.z = _towerHeight;
-	strutY.z = _towerHeight;
-	strutZ.z = _towerHeight;
-
-}
-
-void DeltaRamps::home()
-{
-	Ramps::home();
+	a = (Sb - Sp) / 2;
+	b = Wb - Wp;
+	c = Up - Ub;
 }
 
 void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)
@@ -47,7 +41,11 @@ void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)
 
 point_t DeltaRamps::convertToAxes(point_t point)
 {
-	//omvormen van een cartesiaans punt tot de posities van de assen
+	double C1  =  point.x^2 + point.y^2 + point.z^2 + a^2 + b^2 + 2*a*point.x + 2*b*point.y - l^2;
+	double C2  =  point.x^2 + point.y^2 + point.z^2 + a^2 + b^2 - 2*a*point.x + 2*b*point.y - l^2;
+	double C3  =  point.x^2 + point.y^2 + point.z^2 + c^2 + 2*c*point.y - l^2;
+
+	
 
 	return point;
 }
