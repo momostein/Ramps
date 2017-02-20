@@ -19,16 +19,16 @@ void setup()
 void loop()
 {
 
-	deltaRamps.moveToDelta(point_t(0,150,150), 2, 30);
+	deltaRamps.moveToDelta(point_t(0,125,150), 2, 30);
 	delay(500);
-	deltaRamps.moveToDelta(point_t(0,-150,150), 2, 30);
+	deltaRamps.moveToDelta(point_t(0,-125,150), 2, 30);
 	delay(500);
 	deltaRamps.moveToDelta(point_t(0,0,150), 2, 30);
 	delay(1000);
-
-	deltaRamps.moveToDelta(point_t(150,0,150), 2, 30);
+	
+	deltaRamps.moveToDelta(point_t(125,0,150), 2, 30);
 	delay(500);
-	deltaRamps.moveToDelta(point_t(-150,0,150), 2, 30);
+	deltaRamps.moveToDelta(point_t(-125,0,150), 2, 30);
 	delay(500);
 
 	deltaRamps.moveToDelta(point_t(0,0,150), 2, 30);
