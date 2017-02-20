@@ -80,7 +80,7 @@ point_t DeltaRamps::convertToCart(point_t point)
 
 	position.z = position.z - Oz + H; //de vorige berekingen hebben hun oorsprong aan de bovenkant van de constructie.
 
-	return point;
+	return position;
 }
 
 point_t DeltaRamps::getPosition()
