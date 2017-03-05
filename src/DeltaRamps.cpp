@@ -43,7 +43,7 @@ point_t DeltaRamps::convertToAxes(point_t point)
 {
 	point_t Axes = point_t(0,0,0);
 
-	point.z = point.z - H; //de volgende berekingen hebben hun oorsprong aan de bovenkant van de constructie.
+	point.z = point.z + Oz - H; //de volgende berekingen hebben hun oorsprong aan de bovenkant van de constructie.
 
 	double Cx  =  square(point.x) + square(point.y) + square(point.z) + square(a) + square(b) + 2*a*point.x + 2*b*point.y - square(l);
 	double Cy  =  square(point.x) + square(point.y) + square(point.z) + square(a) + square(b) - 2*a*point.x + 2*b*point.y - square(l);
@@ -78,9 +78,9 @@ point_t DeltaRamps::convertToCart(point_t point)
 	position.x = d*position.z + e;
 	position.y = D*position.z + E;
 
-	position.z = position.z + H; //de vorige berekingen hebben hun oorsprong aan de bovenkant van de constructie.
+	position.z = position.z - Oz + H; //de vorige berekingen hebben hun oorsprong aan de bovenkant van de constructie.
 
-	return point;
+	return position;
 }
 
 point_t DeltaRamps::getPosition()

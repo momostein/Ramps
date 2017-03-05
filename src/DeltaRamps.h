@@ -37,11 +37,13 @@ class DeltaRamps: public Ramps
 		void moveToDelta(point_t target, double stepSize, int delay);
 
 		point_t convertToAxes(point_t point);
-		point_t convertToCart(point_t point);
-
-		point_t getPosition();
 
 	private:
+
+		//putting these in private because they do not work, yet...
+		point_t convertToCart(point_t point);
+		point_t getPosition();
+
 		int stepsmm;
 
 		double H; //frame height
