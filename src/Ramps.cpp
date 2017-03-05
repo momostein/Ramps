@@ -123,7 +123,7 @@ void Ramps::home()
 			allhome = false;
 		}
 
-		delayMicroseconds(200);
+		delayMicroseconds(100);
 
 		motorX.stepOff();
 		motorY.stepOff();
