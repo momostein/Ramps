@@ -11,7 +11,7 @@ DeltaRamps deltaRamps = DeltaRamps(STEPS_MM, BASE_SIDE, TOWER_HEIGHT, ARM_LENGHT
 void setup()
 {
 	Serial.begin(9600);
-	deltaRamps.home();
+	deltaRamps.home(100);
 }
 
 void loop()

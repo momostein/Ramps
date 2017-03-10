@@ -32,11 +32,43 @@ DeltaRamps::DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, doub
 	c = Up - Ub;
 }
 
-void DeltaRamps::moveToDelta(point_t target, double stepSize, int delay)
+void DeltaRamps::home(int _delay)
 {
-	//hier worden de berekeningen gedaan en zo bewogen in een rechte lijn
-	point_t targetAxes = convertToAxes(target);
-	Ramps::moveTo(targetAxes.x, targetAxes.y, targetAxes.z, delay);
+	Ramps::home(_delay);
+	delay(50);
+	DeltaRamps::moveTo(DeltaRamps::convertToAxes(point_t(0,0,0)), _delay);
+	pos = point_t(0,0,0);
+}
+
+void DeltaRamps::moveTo(point_t target, int _delay)
+{
+	Ramps::moveTo(target.x, target.y, target.z, _delay);
+}
+
+void DeltaRamps::moveToDelta(point_t target, int steps, int _delay)
+{
+	point_t points[steps];
+	points[steps - 1] = target;
+
+	point_t step = (target - pos)/steps;
+	points[0] = pos + step;
+
+	for (int i = 1; i < steps - 1; i++)
+	{
+		points[i] = points[i - 1] + step;
+	}
+
+	for (int i = 0; i < steps; i++)
+	{
+		points[i] = DeltaRamps::convertToAxes(points[i]);
+	}
+
+	for (int i = 0; i < steps; i++)
+	{
+		DeltaRamps::moveTo(points[i], _delay);
+	}
+
+	pos = target;
 }
 
 point_t DeltaRamps::convertToAxes(point_t point)
@@ -54,36 +86,4 @@ point_t DeltaRamps::convertToAxes(point_t point)
 	Axes.z = ((-1)*point.z - sqrt(square(point.z) - Cz)) * stepsmm;
 
 	return Axes;
-}
-
-point_t DeltaRamps::convertToCart(point_t point)
-{
-	point.x = point.x / stepsmm;
-	point.y = point.y / stepsmm;
-	point.z = point.z / stepsmm;
-
-	point_t position = point_t(0,0,0);
-
-	double d = (point.y - point.x) / (2*a);
-	double e = (square(point.y)-square(point.x)) / (4*a);
-
-	double D = (point.y - point.x - 2*a*d) / (b - c);
-	double E = (square(c) - square(a) - square(b) - 2*a*e + square(point.z) - square(point.x)) / (2*(b - c));
-
-	double A = square(d) + square(D) + l;
-	double B = 2*(d*e + D*E + c*D + point.z);
-	double C = square(e) + square(E) + square(c) + 2*c*E + square(point.z) - square(l);
-
-	position.z = ((-1)*B - sqrt(square(B) - 4*A*C)) / (2*A);
-	position.x = d*position.z + e;
-	position.y = D*position.z + E;
-
-	position.z = position.z - Oz + H; //de vorige berekingen hebben hun oorsprong aan de bovenkant van de constructie.
-
-	return position;
-}
-
-point_t DeltaRamps::getPosition()
-{
-	return convertToCart(point_t(motorX.position, motorY.position, motorZ.position));
 }
