@@ -26,6 +26,12 @@ struct point_t
 		y = _y;
 		z = _z;
 	};
+	point_t()
+	{
+		x = 0;
+		y = 0;
+		z = 0;
+	};
 };
 
 
