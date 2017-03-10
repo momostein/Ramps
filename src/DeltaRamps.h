@@ -33,6 +33,11 @@ struct point_t
 		z = 0;
 	};
 
+	double distanceTo(point_t target)
+	{
+		return sqrt(pow(target.z - z,2),pow(target.z - z,2),pow(target.z - z,2))
+	};
+
 
 
 };
