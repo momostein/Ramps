@@ -33,9 +33,9 @@ struct point_t
 		z = 0;
 	};
 
-	double distanceTo(point_t target)
+	double lenght()
 	{
-		return sqrt(pow(target.z - z,2),pow(target.z - z,2),pow(target.z - z,2))
+		return sqrt(pow(x,2) + pow(y,2) + pow(z,2));
 	};
 
 
