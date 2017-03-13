@@ -33,7 +33,7 @@ struct point_t
 		z = 0;
 	};
 
-	double lenght()
+	double length()
 	{
 		return sqrt(pow(x,2) + pow(y,2) + pow(z,2));
 	};
