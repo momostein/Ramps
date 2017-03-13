@@ -10,7 +10,7 @@ DeltaRamps deltaRamps = DeltaRamps(STEPS_MM, BASE_SIDE, TOWER_HEIGHT, ARM_LENGHT
 
 void setup()
 {
-	deltaRamps.home();
+	deltaRamps.home(100);
 	delay(250);
 	deltaRamps.moveToDelta(point_t(0,0,150), 2, 30);
 	delay(250);
@@ -25,7 +25,7 @@ void loop()
 	delay(500);
 	deltaRamps.moveToDelta(point_t(0,0,150), 2, 30);
 	delay(1000);
-	
+
 	deltaRamps.moveToDelta(point_t(125,0,150), 2, 30);
 	delay(500);
 	deltaRamps.moveToDelta(point_t(-125,0,150), 2, 30);

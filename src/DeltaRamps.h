@@ -69,22 +69,22 @@ inline point_t operator*(const double &n, const point_t &p)
 	return point_t(n*p.x, n*p.y, n*p.z);
 };
 
-
-
 class DeltaRamps: public Ramps
 {
 	public:
 		DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset);
 
-		void moveToDelta(point_t target, double stepSize, int delay);
+		void home(int _delay);
+		void moveToDelta(point_t target, int steps, int delay);
 
 		point_t convertToAxes(point_t point);
 
+
+
+		point_t pos;
 	private:
 
-		//putting these in private because they do not work, yet...
-		point_t convertToCart(point_t point);
-		point_t getPosition();
+		void moveTo(point_t target, int _delay);
 
 		int stepsmm;
 
