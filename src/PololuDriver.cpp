@@ -7,7 +7,7 @@
 #include "Arduino.h"
 
 //Constructor
-pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin)
+PololuStepper::PololuStepper(int _stepPin, int _dirPin, int _enablePin)
 {
 	stepPin = _stepPin;
 	dirPin = _dirPin;
@@ -21,7 +21,7 @@ pololuStepper::pololuStepper(int _stepPin, int _dirPin, int _enablePin)
 }
 
 //Stel richting handmatig in
-void pololuStepper::setDir(short _dir)
+void PololuStepper::setDir(short _dir)
 {
   	if (_dir > 0)
   	{
@@ -36,7 +36,7 @@ void pololuStepper::setDir(short _dir)
 }
 
 //Step Handmatig (Step off moet volgen na een bepaalde vertraging)
-bool pololuStepper::stepOn()
+bool PololuStepper::stepOn()
 {
 	if (!stepped)
 	{
@@ -53,7 +53,7 @@ bool pololuStepper::stepOn()
 }
 
 //Concludeer Stap handmatig (Moet na StepOn komen)
-void pololuStepper::stepOff()
+void PololuStepper::stepOff()
 {
 	if (stepped)
 	{
@@ -63,7 +63,7 @@ void pololuStepper::stepOff()
 }
 
 //Beweeg een aantal stappen in de gekozen richting (positief of negatief) en met de gegeven delay (in microseconden)
-void pololuStepper::autoStep(long amount, int _delay)
+void PololuStepper::autoStep(long amount, int _delay)
 {
 	setDir(constrain(amount, -1, 1));
 
@@ -77,13 +77,13 @@ void pololuStepper::autoStep(long amount, int _delay)
 		stepOn();
 		delayMicroseconds(_delay);
 		stepOff();
-		
+
 		amount -= dir;
 	}
 }
 
 //Beweeg naar doelpositie met gegegeven delay (in microseconden)
-void pololuStepper::moveTo(long targetPos, int _delay)
+void PololuStepper::moveTo(long targetPos, int _delay)
 {
 	autoStep(targetPos - position, _delay);
 }
