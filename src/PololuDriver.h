@@ -12,10 +12,10 @@
 	#include "WProgram.h"
 #endif
 
-class pololuStepper
+class PololuStepper
 {
 	public:
-		pololuStepper(int _stepPin, int _dirPin, int _enablePin); //Constructor
+		PololuStepper(int _stepPin, int _dirPin, int _enablePin); //Constructor
 
 		void setDir(short _dir);					//Stel richting handmatig in
 		bool stepOn();								//Step Handmatig (Step off moet volgen na een bepaalde vertraging)
