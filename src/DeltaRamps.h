@@ -33,7 +33,7 @@ struct point_t
 		z = 0;
 	};
 
-	double lenght()
+	double length()
 	{
 		return sqrt(pow(x,2) + pow(y,2) + pow(z,2));
 	};
@@ -75,7 +75,7 @@ class DeltaRamps: public Ramps
 		DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset);
 
 		void home(int _delay);
-		void moveToDelta(point_t target, int steps, int delay);
+		void moveToDelta(point_t target, int delay);
 
 		point_t convertToAxes(point_t point);
 

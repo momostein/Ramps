@@ -45,8 +45,10 @@ void DeltaRamps::moveTo(point_t target, int _delay)
 	Ramps::moveTo(target.x, target.y, target.z, _delay);
 }
 
-void DeltaRamps::moveToDelta(point_t target, int steps, int _delay)
+void DeltaRamps::moveToDelta(point_t target, int _delay)
 {
+	int steps = int((target - pos).length());
+
 	point_t points[steps];
 	points[steps - 1] = target;
 
