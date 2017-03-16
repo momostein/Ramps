@@ -88,7 +88,7 @@ void Ramps::fan(bool On)
 }
 
 //Beweeg Motors X, Y en Z naar hun Home positie
-void Ramps::home()
+void Ramps::home(int _delay)
 {
 	bool allhome = false;
 
@@ -123,7 +123,7 @@ void Ramps::home()
 			allhome = false;
 		}
 
-		delayMicroseconds(100);
+		delayMicroseconds(_delay);
 
 		motorX.stepOff();
 		motorY.stepOff();

@@ -32,23 +32,59 @@ struct point_t
 		y = 0;
 		z = 0;
 	};
+
+	double length()
+	{
+		return sqrt(pow(x,2) + pow(y,2) + pow(z,2));
+	};
+
+
+
 };
 
+inline point_t operator+(const point_t &a, const point_t &b)
+{
+	return point_t(a.x+b.x,a.y+b.y,a.z+b.z);
+};
+inline point_t operator-(const point_t &a, const point_t &b)
+{
+	return point_t(a.x-b.x,a.y-b.y,a.z-b.z);
+};
+
+inline point_t operator/(const point_t &p,const double &n)
+{
+	return point_t(p.x/n, p.y/n, p.z/n);
+};
+inline point_t operator/(const double &n, const point_t &p)
+{
+	return point_t(n/p.x, n/p.y, n/p.z);
+};
+
+inline point_t operator*(const point_t &p,const double &n)
+{
+	return point_t(p.x*n, p.y*n, p.z*n);
+};
+inline point_t operator*(const double &n, const point_t &p)
+{
+	return point_t(n*p.x, n*p.y, n*p.z);
+};
 
 class DeltaRamps: public Ramps
 {
 	public:
 		DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset);
 
-		void moveToDelta(point_t target, double stepSize, int delay);
+		void home(int _delay);
+		void moveToDelta(point_t target, int delay);
 
 		point_t convertToAxes(point_t point);
 
+
+
+		point_t pos;
 	private:
 
-		//putting these in private because they do not work, yet...
-		point_t convertToCart(point_t point);
-		point_t getPosition();
+		void moveTo(point_t target, int _delay);
 
 		int stepsmm;
 
