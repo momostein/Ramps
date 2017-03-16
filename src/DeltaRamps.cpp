@@ -40,6 +40,14 @@ void DeltaRamps::home(int _delay)
 	pos = point_t(0,0,0);
 }
 
+void DeltaRamps::home(int _delay, point_t target)
+{
+	Ramps::home(_delay);
+	delay(50);
+	DeltaRamps::moveTo(DeltaRamps::convertToAxes(target), _delay);
+	pos = target;
+}
+
 void DeltaRamps::moveTo(point_t target, int _delay)
 {
 	Ramps::moveTo(target.x, target.y, target.z, _delay);
