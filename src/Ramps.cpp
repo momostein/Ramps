@@ -38,12 +38,6 @@ Ramps::Ramps()
     pinMode(Q_STEP_PIN, OUTPUT);
     pinMode(Q_DIR_PIN, OUTPUT);
     pinMode(Q_ENABLE_PIN, OUTPUT);
-
-    digitalWrite(X_ENABLE_PIN, LOW);
-    digitalWrite(Y_ENABLE_PIN, LOW);
-    digitalWrite(Z_ENABLE_PIN, LOW);
-    digitalWrite(E_ENABLE_PIN, LOW);
-    digitalWrite(Q_ENABLE_PIN, LOW);
 }
 
 //LED aan (true) of LED uit (false)
