@@ -38,41 +38,41 @@ struct point_t
 		return sqrt(pow(x,2) + pow(y,2) + pow(z,2));
 	};
 
-
-
 };
 
 inline point_t operator+(const point_t &a, const point_t &b)
 {
-	return point_t(a.x+b.x,a.y+b.y,a.z+b.z);
+	return point_t(a.x + b.x, a.y + b.y, a.z + b.z);
 };
 inline point_t operator-(const point_t &a, const point_t &b)
 {
-	return point_t(a.x-b.x,a.y-b.y,a.z-b.z);
+	return point_t(a.x - b.x, a.y - b.y, a.z - b.z);
 };
 
 inline point_t operator/(const point_t &p,const double &n)
 {
-	return point_t(p.x/n, p.y/n, p.z/n);
+	return point_t(p.x / n, p.y / n, p.z / n);
 };
 inline point_t operator/(const double &n, const point_t &p)
 {
-	return point_t(n/p.x, n/p.y, n/p.z);
+	return point_t(n / p.x, n / p.y, n / p.z);
 };
 
 inline point_t operator*(const point_t &p,const double &n)
 {
-	return point_t(p.x*n, p.y*n, p.z*n);
+	return point_t( p.x * n, p.y * n, p.z * n);
 };
 inline point_t operator*(const double &n, const point_t &p)
 {
-	return point_t(n*p.x, n*p.y, n*p.z);
+	return point_t(n * p.x, n * p.y, n * p.z);
 };
 
 class DeltaRamps: public Ramps
 {
 	public:
-		DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset);
+		DeltaRamps(	int _stepsmm, double _baseSide, double _towerHeight,
+					double _armLenght, double _platformSide,
+					double _nozzleOffset);
 
 		void home(int _delay);
 		void home(int _delay, point_t target);
@@ -92,9 +92,13 @@ class DeltaRamps: public Ramps
 		double H; //frame height
 		double l; //arm lenght
 
-		double Sb; //P joints (Bi) equilateral triangle side
-		double Wb; //planar distance from {0} to P joints triangle side
-		double Ub; //planar distance from {0} to a vertex of the P joints triangle
+		double Sb; 	//P joints (Bi) equilateral triangle side
+
+		double Wb; 	//planar distance from {0}
+					//to P joints triangle side
+
+		double Ub; 	//planar distance from {0}
+					//to a vertex of the P joints triangle
 
 		double Sp; //platform equilateral triangle side
 		double Wp; //planar distance from {P} to near platform side
