@@ -38,12 +38,6 @@ Ramps::Ramps()
     pinMode(Q_STEP_PIN, OUTPUT);
     pinMode(Q_DIR_PIN, OUTPUT);
     pinMode(Q_ENABLE_PIN, OUTPUT);
-
-    digitalWrite(X_ENABLE_PIN, LOW);
-    digitalWrite(Y_ENABLE_PIN, LOW);
-    digitalWrite(Z_ENABLE_PIN, LOW);
-    digitalWrite(E_ENABLE_PIN, LOW);
-    digitalWrite(Q_ENABLE_PIN, LOW);
 }
 
 //LED aan (true) of LED uit (false)
@@ -189,6 +183,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     }
 
     //als deltaX de grootste is gebruiken vergelijken we steeds met de X as
+    //dat doen we ook voor de andere assen als zij groter zijn
     if(deltaX >= deltaY && deltaX >= deltaZ)
     {
         while(motorX.position != targetX)
@@ -221,7 +216,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
             motorZ.stepOff();
         }
     }
-    else if(deltaZ >= deltaX && deltaZ >= deltaY) //als deltaZ de grootste is gebruiken vergelijken we steeds met de Z as
+    else if(deltaZ >= deltaX && deltaZ >= deltaY)
     {
         while(motorZ.position != targetZ)
         {
@@ -253,7 +248,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
             motorZ.stepOff();
         }
     }
-    else if(deltaY >= deltaX && deltaY >= deltaZ) //als deltaY de grootste is gebruiken vergelijken we steeds met de Y as
+    else if(deltaY >= deltaX && deltaY >= deltaZ)
     {
         while(motorY.position != targetY)
         {

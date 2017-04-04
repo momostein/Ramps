@@ -1,5 +1,5 @@
 /*
-	Afmetingen van de delta robot
+	Afmetingen van de deltarobot of -printer
 	Door Brecht Ooms
 */
 
@@ -8,14 +8,13 @@
 
 #define STEPS_MM 160 //Steps per mm
 
-//nog aan te passen
 #define BASE_SIDE 343
 #define TOWER_HEIGHT 610
 
 #define ARM_LENGHT 310
 
 #define PLATFORM_SIDE 42
-#define TOOL_OFFSET 100 //100mm portruding from the platform bottom
+#define TOOL_OFFSET 100
 
 
 #endif
