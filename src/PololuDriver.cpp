@@ -62,12 +62,15 @@ void PololuStepper::stepOff()
 	}
 }
 
-//Beweeg een aantal stappen in de gekozen richting (positief of negatief) en met de gegeven delay (in microseconden)
+//Beweeg een aantal stappen in de gekozen richting (positief of negatief)
+//en met de gegeven delay (in microseconden)
 void PololuStepper::autoStep(long amount, int _delay)
 {
 	setDir(constrain(amount, -1, 1));
 
-	if (stepped) //Het kan gebeuren dat iemand stepOff is vergeten en dan klopt de positie niet meer.
+	//Het kan gebeuren dat iemand stepOff is vergeten
+	//en dan klopt de positie niet meer.
+	if (stepped)
 	{
 		stepOff();
 	}

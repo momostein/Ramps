@@ -1,6 +1,8 @@
 /*
-    DeltaRamps.cpp - Library voor een Deltarobot of -printer met een Ramps shield
-    Gemaakt door Brecht Ooms
+    DeltaRamps.cpp - Library voor een Deltarobot of -printer
+	met een Ramps shield
+
+	Gemaakt door Brecht Ooms
 */
 
 #include "Arduino.h"
@@ -9,8 +11,10 @@
 #include "DeltaRamps.h"
 
 
-
-DeltaRamps::DeltaRamps(int _stepsmm, double _baseSide, double _towerHeight, double _armLenght, double _platformSide, double _nozzleOffset):Ramps()
+//Constructor inherit van de Ramps() constructor
+DeltaRamps::DeltaRamps(	int _stepsmm, double _baseSide, double _towerHeight,
+						double _armLenght, double _platformSide,
+						double _nozzleOffset):Ramps()
 {
 	stepsmm = _stepsmm;
 
@@ -44,7 +48,7 @@ void DeltaRamps::home(int _delay, point_t target)
 {
 	Ramps::home(_delay);
 	delay(50);
-	DeltaRamps::moveTo(DeltaRamps::convertToAxes(target), _delay);
+	DeltaRamps::moveTo(DeltaRamps::convertToAxes(target, _delay);
 	pos = target;
 }
 
@@ -83,13 +87,21 @@ void DeltaRamps::moveToDelta(point_t target, int _delay)
 
 point_t DeltaRamps::convertToAxes(point_t point)
 {
-	point_t Axes = point_t(0,0,0);
+	point_t Axes = point_t;
 
-	point.z = point.z + Oz - H; //de volgende berekingen hebben hun oorsprong aan de bovenkant van de constructie.
+	//voor de berekeningen ligt de oorsprong in de top
+	point.z = point.z + Oz - H;
 
-	double Cx  =  square(point.x) + square(point.y) + square(point.z) + square(a) + square(b) + 2*a*point.x + 2*b*point.y - square(l);
-	double Cy  =  square(point.x) + square(point.y) + square(point.z) + square(a) + square(b) - 2*a*point.x + 2*b*point.y - square(l);
-	double Cz  =  square(point.x) + square(point.y) + square(point.z) + square(c) + 2*c*point.y - square(l);
+	double Cx  =	square(point.x) + square(point.y) + square(point.z)
+					+ square(a) + square(b) + 2*a*point.x + 2*b*point.y
+					- square(l);
+
+	double Cy  =	square(point.x) + square(point.y) + square(point.z)
+	 				+ square(a) + square(b) - 2*a*point.x + 2*b*point.y
+					- square(l);
+
+	double Cz  =	square(point.x) + square(point.y) + square(point.z)
+	 				+ square(c) + 2*c*point.y - square(l);
 
 	Axes.x = ((-1)*point.z - sqrt(square(point.z) - Cx)) * stepsmm;
 	Axes.y = ((-1)*point.z - sqrt(square(point.z) - Cy)) * stepsmm;
