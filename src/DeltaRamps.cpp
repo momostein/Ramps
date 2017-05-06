@@ -48,7 +48,7 @@ void DeltaRamps::home(int _delay, point_t target)
 {
 	Ramps::home(_delay);
 	delay(50);
-	DeltaRamps::moveTo(DeltaRamps::convertToAxes(target, _delay);
+	DeltaRamps::moveTo(DeltaRamps::convertToAxes(target), _delay);
 	pos = target;
 }
 
@@ -87,7 +87,7 @@ void DeltaRamps::moveToDelta(point_t target, int _delay)
 
 point_t DeltaRamps::convertToAxes(point_t point)
 {
-	point_t Axes = point_t;
+	point_t Axes;
 
 	//voor de berekeningen ligt de oorsprong in de top
 	point.z = point.z + Oz - H;
