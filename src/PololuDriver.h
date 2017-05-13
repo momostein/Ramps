@@ -41,8 +41,10 @@ class PololuStepper
 
 	//private variabelen en functies (die men niet kan gebruiken)
 	private:
+
 		//Draairichting
 		short dir = 1;
+		
 		//controlevariabele om fouten te voorkomen
 		bool stepped = false;
 

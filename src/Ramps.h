@@ -53,12 +53,12 @@
 
 #define HEATER_0_PIN       10	//PWM PIN!
 #define HEATER_1_PIN       8	//PWM PIN!
-#define TEMP_0_PIN         13	// Analoge numering
-#define TEMP_1_PIN         14	// Analoge numering
+#define TEMP_0_PIN         13	//Analoge numering
+#define TEMP_1_PIN         14	//Analoge numering
 
 class Ramps
 {
-	//public variabelen en functies (die men kan gebruiken)
+	//Public variabelen en functies (die men kan gebruiken)
 	public: //Public functies en variabelen
 
 		//Constructor
@@ -70,7 +70,7 @@ class Ramps
 		//LED aan (true) of LED uit (false)
 		void led(bool On);
 
-		//heater (0 of 1) aansturen met PWM (byte)
+		//Heater (0 of 1) aansturen met PWM (byte)
 		void heater(int heaterNum, byte value);
 
 		//Fan aan (true) of fan uit (false)
@@ -79,7 +79,7 @@ class Ramps
 		//Beweeg naar gegeven positie met bresenhams lijn algoritme
 		void moveTo(long targetX, long targetY, long targetZ, int _delay);
 
-		//declareren van motors
+		//Declaratie van de motors
 		PololuStepper motorX = PololuStepper(	X_STEP_PIN, X_DIR_PIN,
 												X_ENABLE_PIN);
 		PololuStepper motorY = PololuStepper(	Y_STEP_PIN, Y_DIR_PIN,

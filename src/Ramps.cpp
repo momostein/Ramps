@@ -54,7 +54,7 @@ void Ramps::led(bool On)
 }
 
 
-//heater (0 of 1) aansturen met PWM (byte)
+//Heater (0 of 1) aansturen met PWM (byte)
 void Ramps::heater(int heaterNum, byte value)
 {
     if (heaterNum == 0)
@@ -86,12 +86,12 @@ void Ramps::home(int _delay)
 {
 	bool allhome = false;
 
-	//stepOff van motoren
+	//stepOff() van motoren
 	motorX.stepOff();
 	motorY.stepOff();
 	motorZ.stepOff();
 
-	//Zet richtingen van motors
+	//Stel de richting van motoren in
 	motorX.setDir(-1);
 	motorY.setDir(-1);
 	motorZ.setDir(-1);
@@ -100,10 +100,10 @@ void Ramps::home(int _delay)
 	{
 		allhome = true;
 
-		//Test of de motor(s) al home zijn
+		//Test of de motor(en) al home zijn
 		if (digitalRead(X_MIN_PIN))
 		{
-            //zet een stap als de motor niet home is en zet allhome false
+            //Zet een stap als de motor niet home is en zet allhome false
 			motorX.stepOn();
 			allhome = false;
 		}
@@ -118,14 +118,14 @@ void Ramps::home(int _delay)
 			allhome = false;
 		}
 
-        //vertraging zodat de motors geen stappen overslaan
+        //Vertraging zodat de motors geen stappen overslaan
 		delayMicroseconds(_delay);
 
 		motorX.stepOff();
 		motorY.stepOff();
 		motorZ.stepOff();
 
-        //blijf homen totdat alle motoren gehomed zijn
+        //Blijf dit alles herhalen totdat alle motoren gehomed zijn
 	} while (allhome == false);
 
 	//Zet de richting al positief (om foute steprichting te voorkomen)
@@ -142,12 +142,12 @@ void Ramps::home(int _delay)
 void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
 {
 
-    //stepOff van motoren
+    //stepOff() van motoren
 	motorX.stepOff();
 	motorY.stepOff();
 	motorZ.stepOff();
 
-    //Bewegen volgens het algoritme van Bresenham (aangepast voor 3D en zonder floating point berekeningend)
+    //Beweeg volgens het algoritme van Bresenham (aangepast voor 3D en zonder floating point berekeningend)
     long deltaX = targetX - motorX.position;
     long deltaY = targetY - motorY.position;
     long deltaZ = targetZ - motorZ.position;
@@ -186,8 +186,8 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
         motorZ.setDir(1);
     }
 
-    //als deltaX de grootste is gebruiken vergelijken we steeds met de X as
-    //dat doen we ook voor de andere assen als zij groter zijn
+    //Als deltaX de grootste is gebruiken vergelijken we steeds met de X as
+    //Dat doen we ook voor de andere assen als zij groter zijn
     if(deltaX >= deltaY && deltaX >= deltaZ)
     {
         while(motorX.position != targetX)
@@ -200,21 +200,21 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
 
             if(errorY > deltaX)
             {
-                //motor Y stapt
+                //Motor Y stapt
                 motorY.stepOn();
                 errorY -= 2*deltaX;
             }
 
             if(errorZ > deltaX)
             {
-                //motor Z stapt
+                //Motor Z stapt
                 motorZ.stepOn();
                 errorZ -= 2*deltaX;
             }
 
             delayMicroseconds(_delay); //Wacht het aantal microseconden
 
-            //stepOff van de motoren
+            //stepOff() van de motoren
             motorX.stepOff();
             motorY.stepOff();
             motorZ.stepOff();
@@ -232,21 +232,21 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
 
             if(errorX > deltaZ)
             {
-                //motor X stapt
+                //Motor X stapt
                 motorX.stepOn();
                 errorX -= 2*deltaZ;
             }
 
             if(errorY > deltaZ)
             {
-                //motor Y stapt
+                //Motor Y stapt
                 motorY.stepOn();
                 errorY -= 2*deltaZ;
             }
 
             delayMicroseconds(_delay); //Wacht het aantal microseconden
 
-            //stepOff van de motoren
+            //stepOff() van de motoren
             motorX.stepOff();
             motorY.stepOff();
             motorZ.stepOff();
@@ -264,21 +264,21 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
 
             if(errorX > deltaY)
             {
-                //motor X stapt
+                //Motor X stapt
                 motorX.stepOn();
                 errorX -= 2*deltaY;
             }
 
             if(errorZ > deltaY)
             {
-                //motor Z stapt
+                //Motor Z stapt
                 motorZ.stepOn();
                 errorZ -= 2*deltaY;
             }
 
             delayMicroseconds(_delay); //Wacht het aantal microseconden
 
-            //stepOff van de motoren
+            //stepOff() van de motoren
             motorX.stepOff();
             motorY.stepOff();
             motorZ.stepOff();
