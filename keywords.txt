@@ -1,21 +1,77 @@
 #######################################
-# Syntax Coloring Map For Fader
+# Syntax Coloring Map For Ramps Library
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-Ramps	KEYWORD1
+PololuStepper 	KEYWORD1
+Ramps			KEYWORD1
+point_t			KEYWORD1
+DeltaRamps 		KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
+setDir 		KEYWORD2
+stepOn 		KEYWORD2
+stepOff 	KEYWORD2
+autoStep	KEYWORD2
+moveTo		KEYWORD2
+
+home 	KEYWORD2
 led		KEYWORD2
 heater	KEYWORD2
 fan		KEYWORD2
+moveTo 	KEYWORD2
+
+length 	KEYWORD2
+
+moveToDelta		KEYWORD2
+convertToAxes	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+X_STEP_PIN         LITERAL1
+X_DIR_PIN          LITERAL1
+X_ENABLE_PIN       LITERAL1
+X_MIN_PIN          LITERAL1
+X_MAX_PIN          LITERAL1
+
+Y_STEP_PIN         LITERAL1
+Y_DIR_PIN          LITERAL1
+Y_ENABLE_PIN       LITERAL1
+Y_MIN_PIN          LITERAL1
+Y_MAX_PIN          LITERAL1
+
+Z_STEP_PIN         LITERAL1
+Z_DIR_PIN          LITERAL1
+Z_ENABLE_PIN       LITERAL1
+Z_MIN_PIN          LITERAL1
+Z_MAX_PIN          LITERAL1
+
+E_STEP_PIN         LITERAL1
+E_DIR_PIN          LITERAL1
+E_ENABLE_PIN       LITERAL1
+
+Q_STEP_PIN         LITERAL1
+Q_DIR_PIN          LITERAL1
+Q_ENABLE_PIN       LITERAL1
+
+SDPOWER            LITERAL1
+SDSS               LITERAL1
+LED_PIN            LITERAL1
+
+FAN_PIN            LITERAL1
+
+PS_ON_PIN          LITERAL1
+KILL_PIN           LITERAL1
+
+HEATER_0_PIN       LITERAL1
+HEATER_1_PIN       LITERAL1
+TEMP_0_PIN         LITERAL1
+TEMP_1_PIN         LITERAL1
