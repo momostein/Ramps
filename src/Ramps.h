@@ -87,9 +87,6 @@ class Ramps
 												E_ENABLE_PIN);
 		PololuStepper motorQ = PololuStepper(	Q_STEP_PIN, Q_DIR_PIN,
 												Q_ENABLE_PIN);
-
-	private: //Private functies en variabelen
-
 };
 
 #endif

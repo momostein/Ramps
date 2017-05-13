@@ -5,7 +5,7 @@
 
 #include "Ramps.h"
 
-//Constructor
+//Constructor (initialisatie)
 Ramps::Ramps()
 {
     pinMode(FAN_PIN, OUTPUT);
@@ -103,6 +103,7 @@ void Ramps::home(int _delay)
 		//Test of de motor(s) al home zijn
 		if (digitalRead(X_MIN_PIN))
 		{
+            //zet een stap als de motor niet home is en zet allhome false
 			motorX.stepOn();
 			allhome = false;
 		}
@@ -117,12 +118,14 @@ void Ramps::home(int _delay)
 			allhome = false;
 		}
 
+        //vertraging zodat de motors geen stappen overslaan
 		delayMicroseconds(_delay);
 
 		motorX.stepOff();
 		motorY.stepOff();
 		motorZ.stepOff();
 
+        //blijf homen totdat alle motoren gehomed zijn
 	} while (allhome == false);
 
 	//Zet de richting al positief (om foute steprichting te voorkomen)
@@ -144,6 +147,7 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
 	motorY.stepOff();
 	motorZ.stepOff();
 
+    //Bewegen volgens het algoritme van Bresenham (aangepast voor 3D en zonder floating point berekeningend)
     long deltaX = targetX - motorX.position;
     long deltaY = targetY - motorY.position;
     long deltaZ = targetZ - motorZ.position;
