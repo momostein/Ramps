@@ -15,15 +15,19 @@
 class PololuStepper
 {
 	public:
-		PololuStepper(int _stepPin, int _dirPin, int _enablePin); //Constructor
+		//Constructor
+		PololuStepper(int _stepPin, int _dirPin, int _enablePin);
 
-		void setDir(short _dir);	//Bepaal Draairichting
+		//Bepaal Draairichting
+		void setDir(short _dir);
 
-		bool stepOn();				//Step Handmatig
-									//(stepOff moet daarna komen)
+		//Step Handmatig
+		//(stepOff moet daarna komen)
+		bool stepOn();
 
-		void stepOff();				//Concludeer Stap handmatig
-									//(Moet na StepOn komen)
+		//Concludeer Stap handmatig
+		//(Moet na StepOn komen)
+		void stepOff();
 
 		//Beweeg een aantal stappen. (aantal kan negatief zijn)
 		void autoStep(long amount, int _delay);
@@ -31,7 +35,8 @@ class PololuStepper
 		//Beweeg naar doelpositie met gegegeven delay (in microseconden)
 		void moveTo(long targetPos, int _delay);
 
-		long position = 0;			//Positie
+		//Positie
+		long position = 0;
 
 	private:
 		short dir = 1;
@@ -40,7 +45,6 @@ class PololuStepper
 		int stepPin;
 		int dirPin;
 		int enablePin;
-
 };
 
 #endif

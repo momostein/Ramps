@@ -6,7 +6,7 @@
 #include "PololuDriver.h"
 #include "Arduino.h"
 
-//Constructor
+//Constructor (initialisatie)
 PololuStepper::PololuStepper(int _stepPin, int _dirPin, int _enablePin)
 {
 	stepPin = _stepPin;
@@ -85,7 +85,7 @@ void PololuStepper::autoStep(long amount, int _delay)
 	}
 }
 
-//Beweeg naar doelpositie met gegegeven delay (in microseconden)
+//Beweeg naar doelpositie met gegeven delay (in microseconden)
 void PololuStepper::moveTo(long targetPos, int _delay)
 {
 	autoStep(targetPos - position, _delay);
