@@ -15,17 +15,24 @@
 #include "WProgram.h"
 #endif
 
+//nieuw type variabele met x, y en z waarde
+//Dus een positievector
 struct point_t
 {
+	//x, y en z waardes
 	double x;
 	double y;
 	double z;
+
+	//constructor met parameters
 	point_t(double _x, double _y, double _z)
 	{
 		x = _x;
 		y = _y;
 		z = _z;
 	};
+
+	//constructor zonder parameters
 	point_t()
 	{
 		x = 0;
@@ -33,6 +40,7 @@ struct point_t
 		z = 0;
 	};
 
+	//bereken de lengte met pythagoras
 	double length()
 	{
 		return sqrt(pow(x,2) + pow(y,2) + pow(z,2));
@@ -40,55 +48,75 @@ struct point_t
 
 };
 
+//Alle operators voor point_t variabeletype
+
+//point_t + point_t
 inline point_t operator+(const point_t &a, const point_t &b)
 {
 	return point_t(a.x + b.x, a.y + b.y, a.z + b.z);
 };
+//point_t - point_t
 inline point_t operator-(const point_t &a, const point_t &b)
 {
 	return point_t(a.x - b.x, a.y - b.y, a.z - b.z);
 };
 
+//point_t / n
 inline point_t operator/(const point_t &p,const double &n)
 {
 	return point_t(p.x / n, p.y / n, p.z / n);
 };
+//n / point_t
 inline point_t operator/(const double &n, const point_t &p)
 {
 	return point_t(n / p.x, n / p.y, n / p.z);
 };
 
+//point_t * n
 inline point_t operator*(const point_t &p,const double &n)
 {
 	return point_t( p.x * n, p.y * n, p.z * n);
 };
+//n * point_t
 inline point_t operator*(const double &n, const point_t &p)
 {
 	return point_t(n * p.x, n * p.y, n * p.z);
 };
 
+
+//DeltaRamps klasse
 class DeltaRamps: public Ramps
 {
+	//public variabelen en functies (die men kan gebruiken)
 	public:
+		//Constructor
 		DeltaRamps(	int _stepsmm, double _baseSide, double _towerHeight,
 					double _armLenght, double _platformSide,
 					double _nozzleOffset);
 
+		//homefuncties zijn aangepast dus we declareren ze opnieuw (met en zonder target)
 		void home(int _delay);
 		void home(int _delay, point_t target);
+
+		//Beweeg in een rechte lijn
 		void moveToDelta(point_t target, int delay);
 
+		//Omrekening van een punt in de ruimte naar posities van de assen
 		point_t convertToAxes(point_t point);
 
-
-
+		//Positie van de eindeffector in de ruimte
 		point_t pos;
-	private:
 
+	//private variabelen en functies (die men niet kan gebruiken)
+	private:
+		
+		//Overload de moveTo functie zodat hij werkt met point_t
 		void moveTo(point_t target, int _delay);
 
+		//Stappen per mm
 		int stepsmm;
 
+		//Afmetingen van de Deltarobot (voor de berekeningen)
 		double H; //frame height
 		double l; //arm lenght
 
@@ -106,6 +134,7 @@ class DeltaRamps: public Ramps
 
 		double Oz; //nozzle z offset
 
+		//Hulpgetallen voor de berekeningen
 		double a;
 		double b;
 		double c;

@@ -14,6 +14,7 @@
 
 class PololuStepper
 {
+	//public variabelen en functies (die men kan gebruiken)
 	public:
 		//Constructor
 		PololuStepper(int _stepPin, int _dirPin, int _enablePin);
@@ -38,10 +39,14 @@ class PololuStepper
 		//Positie
 		long position = 0;
 
+	//private variabelen en functies (die men niet kan gebruiken)
 	private:
+		//Draairichting
 		short dir = 1;
+		//controlevariabele om fouten te voorkomen
 		bool stepped = false;
 
+		//aansluitingen
 		int stepPin;
 		int dirPin;
 		int enablePin;

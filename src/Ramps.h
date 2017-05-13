@@ -14,6 +14,8 @@
 
 #include "PololuDriver.h"
 
+
+//Aansluiting van RAMPS shield
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
@@ -56,6 +58,7 @@
 
 class Ramps
 {
+	//public variabelen en functies (die men kan gebruiken)
 	public: //Public functies en variabelen
 
 		//Constructor

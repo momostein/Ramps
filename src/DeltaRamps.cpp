@@ -11,7 +11,7 @@
 #include "DeltaRamps.h"
 
 
-//Constructor inherit van de Ramps() constructor
+//Constructor inherits van de Ramps() constructor
 DeltaRamps::DeltaRamps(	int _stepsmm, double _baseSide, double _towerHeight,
 						double _armLenght, double _platformSide,
 						double _nozzleOffset):Ramps()
@@ -21,6 +21,7 @@ DeltaRamps::DeltaRamps(	int _stepsmm, double _baseSide, double _towerHeight,
 	H = _towerHeight;
 	l = _armLenght;
 
+	//berekenen van afmetingen
 	Sb = _baseSide;
 	Wb = sqrt(3) * Sb / 6;
 	Ub = Sb / sqrt(3);
@@ -36,6 +37,7 @@ DeltaRamps::DeltaRamps(	int _stepsmm, double _baseSide, double _towerHeight,
 	c = Up - Ub;
 }
 
+//home functie zonder target zal naar (0,0,0) bewegen nadat hij gehomed is
 void DeltaRamps::home(int _delay)
 {
 	Ramps::home(_delay);
@@ -44,6 +46,7 @@ void DeltaRamps::home(int _delay)
 	pos = point_t(0,0,0);
 }
 
+//home functie met target zal naar de target bewegen nadat hij gehomed is
 void DeltaRamps::home(int _delay, point_t target)
 {
 	Ramps::home(_delay);
@@ -52,39 +55,53 @@ void DeltaRamps::home(int _delay, point_t target)
 	pos = target;
 }
 
+//moveTo met poin_t idpv gewoon x, y en z
 void DeltaRamps::moveTo(point_t target, int _delay)
 {
 	Ramps::moveTo(target.x, target.y, target.z, _delay);
 }
 
+//Beweeg in een rechte lijn
 void DeltaRamps::moveToDelta(point_t target, int _delay)
 {
+	//bereken het aantal stappen van een mm lang
 	int steps = int((target - pos).length());
 
+	//maak een array met dat aantal posities
 	point_t points[steps];
+
+	//Laatste positie is de de eindpositie
 	points[steps - 1] = target;
 
+	//Step is de vector waarmee de positie veranderd per stap
 	point_t step = (target - pos)/steps;
+
+	//eerste positie waarnaar we bewegen is dus de beginpositie + step
 	points[0] = pos + step;
 
+	//elke andere positie is de vorige + step
 	for (int i = 1; i < steps - 1; i++)
 	{
 		points[i] = points[i - 1] + step;
 	}
 
+	//alle posities omvormen naar posities van de assen
 	for (int i = 0; i < steps; i++)
 	{
 		points[i] = DeltaRamps::convertToAxes(points[i]);
 	}
 
+	//één voor één bewegen naar de berekende posities
 	for (int i = 0; i < steps; i++)
 	{
 		DeltaRamps::moveTo(points[i], _delay);
 	}
 
+	//Huidige positie is nu de eindpositie
 	pos = target;
 }
 
+//Omvormen van posities in de ruimte naar posities van de assen
 point_t DeltaRamps::convertToAxes(point_t point)
 {
 	point_t Axes;
