@@ -148,9 +148,10 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
     long deltaY = targetY - motorY.position;
     long deltaZ = targetZ - motorZ.position;
 
-    long errorX = 0;
-    long errorY = 0;
-    long errorZ = 0;
+    // displacement
+    long dispX = 0;
+    long dispY = 0;
+    long dispZ = 0;
 
     if (deltaX < 0)
     {
@@ -190,22 +191,20 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
         {
             //MotorX zal altijd stappen
             motorX.stepOn();
+            dispX++;
 
-            errorY += 2*deltaY;
-            errorZ += 2*deltaZ;
-
-            if(errorY > deltaX)
+            if(dispX * deltaY / deltaX > dispY)
             {
                 //motor Y stapt
                 motorY.stepOn();
-                errorY -= 2*deltaX;
+                dispY++;
             }
 
-            if(errorZ > deltaX)
+            if(dispX * deltaZ / deltaX > dispZ)
             {
                 //motor Z stapt
                 motorZ.stepOn();
-                errorZ -= 2*deltaX;
+                dispZ++;
             }
 
             delayMicroseconds(_delay); //Wacht het aantal microseconden
@@ -222,22 +221,20 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
         {
             //MotorZ zal altijd stappen
             motorZ.stepOn();
+            dispZ++;
 
-            errorX += 2*deltaX;
-            errorY += 2*deltaY;
-
-            if(errorX > deltaZ)
+            if(dispZ * deltaX / deltaZ > motorX.position)
             {
                 //motor X stapt
                 motorX.stepOn();
-                errorX -= 2*deltaZ;
+                dispX++;
             }
 
-            if(errorY > deltaZ)
+            if(dispZ * deltaY / deltaZ > dispY)
             {
                 //motor Y stapt
                 motorY.stepOn();
-                errorY -= 2*deltaZ;
+                dispY++;
             }
 
             delayMicroseconds(_delay); //Wacht het aantal microseconden
@@ -254,22 +251,20 @@ void Ramps::moveTo(long targetX, long targetY, long targetZ, int _delay = 500)
         {
             //MotorX zal altijd stappen
             motorY.stepOn();
+            dispY++;
 
-            errorX += 2*deltaX;
-            errorZ += 2*deltaZ;
-
-            if(errorX > deltaY)
+            if(dispY * deltaX / deltaY > dispX)
             {
                 //motor X stapt
                 motorX.stepOn();
-                errorX -= 2*deltaY;
+                dispX++;
             }
 
-            if(errorZ > deltaY)
+            if(dispY * deltaZ / deltaY > dispZ)
             {
                 //motor Z stapt
                 motorZ.stepOn();
-                errorZ -= 2*deltaY;
+                dispZ++;
             }
 
             delayMicroseconds(_delay); //Wacht het aantal microseconden
